@@ -1,0 +1,222 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:float="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.asc.neetk.whatsplaying.signupActivity">
+
+
+    <LinearLayout
+        android:id="@+id/lin1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/imageViE"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="1dp"
+                android:background="@drawable/userlog" />
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                float:fletTextAppearance="@style/text1">
+
+                <EditText
+                    android:id="@+id/username1"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="30dp"
+                    android:hint="Username"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textIsSelectable="false"
+                    android:typeface="monospace" />
+
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/imageVI"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:background="@drawable/passlog" />
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                float:fletTextAppearance="@style/text1">
+
+                <EditText
+                    android:id="@+id/password1"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="Password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textIsSelectable="false"
+                    android:typeface="monospace" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/passconfirm" />
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                float:fletTextAppearance="@style/text1">
+
+
+                <EditText
+                    android:id="@+id/passconfirm"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Confirm Password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textIsSelectable="false"
+                    android:typeface="monospace" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <ImageView
+                android:id="@+id/passmatchicon"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@drawable/erricon" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/imageV"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="2dp"
+                android:background="@drawable/email" />
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                float:fletTextAppearance="@style/text1">
+
+                <EditText
+                    android:id="@+id/email"
+
+
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:hint="Email"
+                    android:imeOptions="actionGo"
+                    android:inputType="textEmailAddress"
+
+                    android:maxLines="1"
+
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:typeface="monospace" />
+
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </LinearLayout>
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/signupbutton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            fbutton:buttonColor="@color/darkpurple"
+            fbutton:shadowEnabled="true" />
+
+
+    </LinearLayout>
+</RelativeLayout>

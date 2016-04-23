@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout2"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_height="match_parent">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Error"
+            android:id="@+id/title"
+            android:layout_gravity="center_horizontal"
+            android:textSize="50dp"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_above="@+id/description"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Check your internet connection"
+            android:id="@+id/description"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25sp"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retry"
+            android:id="@+id/retry"
+            android:layout_below="@+id/description"
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

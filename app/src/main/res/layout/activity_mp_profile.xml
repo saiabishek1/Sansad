@@ -1,0 +1,108 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/lin3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55dp"
+                android:background="@color/darkpurple" />
+
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/imageView3"
+                android:layout_marginTop="5dp"
+                android:background="@color/darkpurple" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="106dp"
+                android:layout_height="106dp"
+                android:id="@+id/filler"
+                android:layout_gravity="center"
+                android:src="@color/transparent"
+                android:focusableInTouchMode="false"
+                app:border_color="@color/background_material_light"
+                app:border_width="3dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="9dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/viewpropic"
+                android:layout_width="100dp"
+                android:src="@color/transparent"
+                android:layout_height="100dp"
+
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:border_color="@color/darkpurple"
+                app:border_width="5dp" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/viewuname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="utk994"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/viewuserbio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+
+
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" />
+
+        <View style="@style/Divider"
+            android:layout_marginTop="5dp" />
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/chart"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp" />
+
+
+    </LinearLayout>
+</RelativeLayout>
+</ScrollView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hackathon.com.sansad" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginSignup"
+            android:label="@string/title_activity_login_signup" >
+        </activity>
+        <activity
+            android:name=".central"
+            android:label="Central" >
+        </activity>
+        <activity
+            android:name=".NameSearch"
+            android:label="Name Search" >
+        </activity>
+        <activity
+            android:name=".mp_profile"
+            android:label="MP Profile" >
+        </activity>
+        <activity
+            android:name=".SignupActivity"
+            android:label="SignUp" >
+        </activity>
+        <activity
+            android:name=".forgotPass"
+            android:label="Forgot Password" >
+        </activity>
+        <activity
+            android:name=".blank"
+            android:label="@string/title_activity_blank" >
+        </activity>
+        <activity
+            android:name=".mp_details"
+            android:label="@string/title_activity_mp_details" >
+        </activity>
+    </application>
+
+</manifest>

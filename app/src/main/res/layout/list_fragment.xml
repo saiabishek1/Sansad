@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    ?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#29000000">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="460dp"
+            android:layout_marginLeft="250dp"
+            android:text="Search"
+            android:id="@+id/search"
+            android:layout_gravity="center_horizontal" />
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:smoothScrollbar="true"
+            android:showDividers="none" />
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="20dp"/>
+
+
+
+
+    </LinearLayout>
+
+
+    </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
