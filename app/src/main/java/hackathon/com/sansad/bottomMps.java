@@ -369,12 +369,6 @@ public class bottomMps  extends Fragment implements AdapterView.OnItemClickListe
                 });
             }
 
-
-            adapter = new CustomAdapter(mActivity, items);
-
-            adapter.notifyDataSetChanged();
-
-
             animationAdapter = new SwingLeftInAnimationAdapter(adapter);
             animationAdapter.notifyDataSetChanged();
 

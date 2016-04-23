@@ -70,60 +70,55 @@ import mehdi.sakout.dynamicbox.DynamicBox;
  * Created by utk994 on 31-Oct-15.
  */
 public class topMps extends Fragment implements AdapterView.OnItemClickListener {
-        SwipeRefreshLayout mSwipeRefreshLayout;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
 
+    int pos;
+
+    RetreiveItems mTask;
 
 
-        int pos;
+    String[] name = new String[900];
 
-        RetreiveItems mTask;
+    Integer[] constit = new Integer[60];
+    String[] rank = new String[60];
 
-
-
-
-        String[] name = new String[900];
-
-        Integer[] constit = new Integer[60];
-        String[] rank = new String[60];
-
-        Date[] points = new Date[60];
+    Date[] points = new Date[60];
 
     public List<MpData> mpsList;
 
 
-        int size;
-        TextView tv;
+    int size;
+    TextView tv;
 
 
-
-        DynamicListView list;
-
-
-        CustomAdapter adapter;
-        SwingLeftInAnimationAdapter animationAdapter;
-private List<RowItem> rowItems;
-
-        DynamicBox box;
-
-        ActionBar mActionBar;
-
-        ImageLoader imageLoader;
+    DynamicListView list;
 
 
-protected FragmentActivity mActivity;
+    CustomAdapter adapter;
+    SwingLeftInAnimationAdapter animationAdapter;
+    private List<RowItem> rowItems;
+
+    DynamicBox box;
+
+    ActionBar mActionBar;
+
+    ImageLoader imageLoader;
 
 
-@Override
-public void onAttach(Activity activity) {
+    protected FragmentActivity mActivity;
+
+
+    @Override
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = (FragmentActivity) activity;
-        }
+    }
 
 
-@Override
+    @Override
 
-public void onCreate(Bundle savedState) {
+    public void onCreate(Bundle savedState) {
 
 
         super.onCreate(savedState);
@@ -131,22 +126,20 @@ public void onCreate(Bundle savedState) {
         Drawable d = getActivity().getResources().getDrawable(R.drawable.profile1);
 
 
-    SharedPreferences appSharedPrefs = PreferenceManager
-            .getDefaultSharedPreferences(this.getActivity().getApplicationContext());
-    SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-    Gson gson = new Gson();
-    String jsonMps = appSharedPrefs.getString("MyObject", "");
-    Type type = new TypeToken<List<mp>>(){}.getType();
-    mpsList = gson.fromJson(jsonMps, type);
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this.getActivity().getApplicationContext());
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String jsonMps = appSharedPrefs.getString("MyObject", "");
+        Type type = new TypeToken<List<mp>>() {
+        }.getType();
+        mpsList = gson.fromJson(jsonMps, type);
 
-    Collections.sort(mpsList, new CustomComparator());
-    Collections.reverse(mpsList);
-
-
-
+        Collections.sort(mpsList, new CustomComparator());
+        Collections.reverse(mpsList);
 
 
-}
+    }
 
     public class CustomComparator implements Comparator<MpData> {
         @Override
@@ -156,16 +149,15 @@ public void onCreate(Bundle savedState) {
     }
 
 
-
     @Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.list_fragment, null, false);
 
 
         imageLoader = ImageLoader.getInstance();
 
-	Button search= (Button)rootView.findViewById(R.id.search);
+        Button search = (Button) rootView.findViewById(R.id.search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,11 +180,11 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         return rootView;
 
 
-        }
+    }
 
 
-@Override
-public void onActivityCreated(Bundle savedInstanceState) {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
 
         mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
@@ -216,33 +208,31 @@ public void onActivityCreated(Bundle savedInstanceState) {
 
         if (!(isOnline())) {
 
-        box.showCustomView("noNet");
+            box.showCustomView("noNet");
 
-        Button retry = (Button) mActivity.findViewById(R.id.retry);
+            Button retry = (Button) mActivity.findViewById(R.id.retry);
 
-        if (retry != null) {
-        retry.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        mTask = (RetreiveItems) new RetreiveItems().execute();
+            if (retry != null) {
+                retry.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mTask = (RetreiveItems) new RetreiveItems().execute();
 
-        box.showCustomView("loading");
+                        box.showCustomView("loading");
+
+                    }
+                });
+            }
 
         }
-        });
-        }
-
-        }
-
-
 
 
         tv = (TextView) mActivity.findViewById(R.id.empty);
 
         if (savedInstanceState == null) {
 
-        mTask = (RetreiveItems) new RetreiveItems().execute();
-        box.showCustomView("loading");
+            mTask = (RetreiveItems) new RetreiveItems().execute();
+            box.showCustomView("loading");
 
 
         }
@@ -254,163 +244,144 @@ public void onClick(View view) {
 
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-@Override
-public void onRefresh() {
+            @Override
+            public void onRefresh() {
 
 
-        mSwipeRefreshLayout.setRefreshing(true);
+                mSwipeRefreshLayout.setRefreshing(true);
 
-        mTask = (RetreiveItems) new RetreiveItems().execute();
-        box.showCustomView("loading");
-
-
-
-        mSwipeRefreshLayout.setRefreshing(false);
-        tv.setVisibility(View.GONE);
+                mTask = (RetreiveItems) new RetreiveItems().execute();
+                box.showCustomView("loading");
 
 
-        }
+                mSwipeRefreshLayout.setRefreshing(false);
+                tv.setVisibility(View.GONE);
+
+
+            }
         });
 
 
         list.setOnScrollListener(new AbsListView.OnScrollListener() {
 
 
-@Override
-public void onScrollStateChanged(AbsListView view, int scrollState) {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
 
 
-        }
+            }
 
 
-@Override
-public void onScroll(AbsListView view, int firstVisibleItem,
-        int visibleItemCount, int totalItemCount) {
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
 
 
-        boolean enable = false;
-        if (list != null && list.getChildCount() > 0) {
-        // check if the first item of the list is visible
-        boolean firstItemVisible = list.getFirstVisiblePosition() == 0;
-        // check if the top of the first item is visible
-        boolean topOfFirstItemVisible = list.getChildAt(0).getTop() == 0;
-        // enabling or disabling the refresh layout
+                boolean enable = false;
+                if (list != null && list.getChildCount() > 0) {
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = list.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = list.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
 
 
-
-        mSwipeRefreshLayout.setEnabled(enable);
-        return;
-        }
-
-
-        mSwipeRefreshLayout.setEnabled(true);
+                    mSwipeRefreshLayout.setEnabled(enable);
+                    return;
+                }
 
 
-        }
+                mSwipeRefreshLayout.setEnabled(true);
+
+
+            }
         });
 
 
-        }
+    }
 
-@Override
-public void onSaveInstanceState(Bundle outState) {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        }
+    }
 
 
-@Override
-public void onDestroy() {
-        if (mTask!=null)   mTask.cancel(true);
+    @Override
+    public void onDestroy() {
+        if (mTask != null) mTask.cancel(true);
 
 
         super.onDestroy();
 
-        }
-
-
-@Override
-public void onItemClick(AdapterView<?> parent, View view, int position,
-        long id) {
-
-        Intent myIntent = new Intent(getActivity().getBaseContext(),mp_profile.class);
-             myIntent.putExtra("name", rowItems.get(position).getName()); //Optional parameters
-             myIntent.putExtra("debate", mpsList.get(position).getDebates()); //Optional parameters
-             myIntent.putExtra("bills", mpsList.get(position).getPrivate_bills()); //Optional parameters
-             myIntent.putExtra("questions", mpsList.get(position).getQuestions()); //Optional parameters
-             myIntent.putExtra("age", mpsList.get(position).getAge()); //Optional parameters
-             myIntent.putExtra("education", mpsList.get(position).getEducation_details()); //Optional parameters
-             myIntent.putExtra("constit", mpsList.get(position).getConstituency()); //Optional parameters
-             myIntent.putExtra("state",  mpsList.get(position).getState()); //Optional parameters
-             myIntent.putExtra("house", mpsList.get(position).getHouse()); //Optional parameters
-
-
-
-         topMps.this.startActivity(myIntent);
-
-
-
-
-
-        }
-
-
-
-
-public class RetreiveItems extends AsyncTask<String, Void, List<RowItem>> {
+    }
 
 
     @Override
-    protected List<RowItem> doInBackground(String... urls) {
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+
+        Intent myIntent = new Intent(getActivity().getBaseContext(), mp_profile.class);
+        myIntent.putExtra("name", rowItems.get(position).getName()); //Optional parameters
+        myIntent.putExtra("debate", mpsList.get(position).getDebates()); //Optional parameters
+        myIntent.putExtra("bills", mpsList.get(position).getPrivate_bills()); //Optional parameters
+        myIntent.putExtra("questions", mpsList.get(position).getQuestions()); //Optional parameters
+        myIntent.putExtra("age", mpsList.get(position).getAge()); //Optional parameters
+        myIntent.putExtra("education", mpsList.get(position).getEducation_details()); //Optional parameters
+        myIntent.putExtra("constit", mpsList.get(position).getConstituency()); //Optional parameters
+        myIntent.putExtra("state", mpsList.get(position).getState()); //Optional parameters
+        myIntent.putExtra("house", mpsList.get(position).getHouse()); //Optional parameters
 
 
-        if (!(isOnline())) {
-
-            box.showCustomView("noNet");
+        topMps.this.startActivity(myIntent);
 
 
-        }
+    }
 
 
+    public class RetreiveItems extends AsyncTask<String, Void, List<RowItem>> {
 
 
-        rowItems = new ArrayList<RowItem>();
+        @Override
+        protected List<RowItem> doInBackground(String... urls) {
 
 
-        final Drawable defdrawable = getResources().getDrawable(R.drawable.profile);
+            if (!(isOnline())) {
 
-        ServiceHandler sh = new ServiceHandler();
-
-
+                box.showCustomView("noNet");
 
 
-        for ( int i=0;i<20;i++)
-        { String constit = mpsList.get(i).getConstituency();
-
-            String points  = mpsList.get(i).getScore();
-            if (constit.equals("0"))
-                constit = "";
-
-            if (points.equals("0"))
-                points = "";
-
-            else points = points+ " points";
+            }
 
 
-            name[i] = mpsList.get(i).getFirst_name()+" "+mpsList.get(i).getLast_name();
-
-            name[i] = name[i].replaceAll(" ", "_");
+            rowItems = new ArrayList<RowItem>();
 
 
+            final Drawable defdrawable = getResources().getDrawable(R.drawable.profile);
+
+            ServiceHandler sh = new ServiceHandler();
 
 
-                                RowItem row1 = new RowItem(mpsList.get(i).getFirst_name()+" "+mpsList.get(i).getLast_name(), constit, points, "#"+(i +1),mpsList.get(i).getImgurl());
-                                rowItems.add(row1);
+            for (int i = 0; i < 20; i++) {
+                String constit = mpsList.get(i).getConstituency();
+
+                String points = mpsList.get(i).getScore();
+                if (constit.equals("0"))
+                    constit = "";
+
+                if (points.equals("0"))
+                    points = "";
+
+                else points = points + " points";
 
 
+                name[i] = mpsList.get(i).getFirst_name() + " " + mpsList.get(i).getLast_name();
+
+                name[i] = name[i].replaceAll(" ", "_");
 
 
-
+                RowItem row1 = new RowItem(mpsList.get(i).getFirst_name() + " " + mpsList.get(i).getLast_name(), constit, points, "#" + (i + 1), mpsList.get(i).getImgurl());
+                rowItems.add(row1);
 
 
             }
@@ -420,62 +391,43 @@ public class RetreiveItems extends AsyncTask<String, Void, List<RowItem>> {
         }
 
 
+        @Override
+        protected void onPostExecute(List<RowItem> items) {
+
+            {
+                Button retry = (Button) mActivity.findViewById(R.id.retry);
 
 
+                retry.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        mTask = (RetreiveItems) new RetreiveItems().execute();
+                    }
+                });
+            }
 
 
+            animationAdapter = new SwingLeftInAnimationAdapter(adapter);
+            animationAdapter.notifyDataSetChanged();
 
 
+            if (list != null)
+
+            {
+                animationAdapter.setAbsListView(list);
 
 
-
-    @Override
-    protected void onPostExecute(List<RowItem> items) {
-
-        {
-            Button retry = (Button) mActivity.findViewById(R.id.retry);
+                list.setAdapter(animationAdapter);
 
 
+                adapter.notifyDataSetChanged();
+                animationAdapter.notifyDataSetChanged();
 
-            retry.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    mTask = (RetreiveItems) new RetreiveItems().execute();
-                }
-            });
-        }
+            }
 
 
-        adapter = new CustomAdapter(mActivity, items);
-
-        adapter.notifyDataSetChanged();
-
-
-        animationAdapter = new SwingLeftInAnimationAdapter(adapter);
-        animationAdapter.notifyDataSetChanged();
-
-
-        if (list != null)
-
-        {
-            animationAdapter.setAbsListView(list);
-
-
-            list.setAdapter(animationAdapter);
-
-
-
-                        adapter.notifyDataSetChanged();
-                        animationAdapter.notifyDataSetChanged();
-
-                }
-
-
-
-
-
-        box.hideAll();
+            box.hideAll();
 
 
        /* YoYo.with(Techniques.Wobble)
@@ -495,30 +447,21 @@ public class RetreiveItems extends AsyncTask<String, Void, List<RowItem>> {
             startActivity(intent); */
         }
 
-    public View getViewByPosition(int pos, ListView listView) {
-        final int firstListItemPosition = listView.getFirstVisiblePosition();
-        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+        public View getViewByPosition(int pos, ListView listView) {
+            final int firstListItemPosition = listView.getFirstVisiblePosition();
+            final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
-        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
-            return listView.getAdapter().getView(pos, null, listView);
-        } else {
-            final int childIndex = pos - firstListItemPosition;
-            return listView.getChildAt(childIndex);
+            if (pos < firstListItemPosition || pos > lastListItemPosition) {
+                return listView.getAdapter().getView(pos, null, listView);
+            } else {
+                final int childIndex = pos - firstListItemPosition;
+                return listView.getChildAt(childIndex);
+            }
         }
+
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    } public boolean isOnline() {
+    public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) mActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

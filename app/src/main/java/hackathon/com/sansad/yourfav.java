@@ -414,10 +414,6 @@ public class yourfav extends Fragment implements AdapterView.OnItemClickListener
             }
 
 
-            adapter = new CustomAdapter(mActivity, items);
-
-            adapter.notifyDataSetChanged();
-
 
             animationAdapter = new SwingLeftInAnimationAdapter(adapter);
             animationAdapter.notifyDataSetChanged();
