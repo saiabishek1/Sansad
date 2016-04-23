@@ -389,14 +389,6 @@ public class yourfav extends Fragment implements AdapterView.OnItemClickListener
             rowItems = new ArrayList<RowItem>();
 
 
-            final Drawable defdrawable = getResources().getDrawable(R.drawable.profile);
-
-            RowItem row1 = new RowItem("Naredra Modi","Varanasi","1000 Points","#1",defdrawable);
-
-            rowItems.add(row1);
-            rowItems.add(row1);
-            rowItems.add(row1);
-            rowItems.add(row1);
 
             return rowItems;
 

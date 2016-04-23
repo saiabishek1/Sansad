@@ -105,7 +105,10 @@
     <string name="title_activity_guide">guide</string>
     <string name="title_activity_blank">blank</string>
     <string name="title_activity_mp_details">mp_details</string>
+    <string name="sign_in_with_google">Log in with Google+</string>
+    <string name="sign_in_with_facebook">Log in with Facebook</string>
 
+    <string name="facebook_app_id">874252856034441</string>
 
 
 </resources>

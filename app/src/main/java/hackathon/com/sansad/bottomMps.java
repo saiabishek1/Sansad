@@ -17,18 +17,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.app.ActivityManager;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -48,6 +42,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import hackathon.com.sansad.models.mp.MpData;
 import mehdi.sakout.dynamicbox.DynamicBox;
 
 /**
@@ -62,7 +57,7 @@ public class bottomMps  extends Fragment implements AdapterView.OnItemClickListe
     RetreiveItems mTask;
 
 
-    String[] name = new String[60];
+    String[] name = new String[900];
 
     Integer[] constit = new Integer[60];
     String[] rank = new String[60];
@@ -82,7 +77,7 @@ public class bottomMps  extends Fragment implements AdapterView.OnItemClickListe
     CustomAdapter adapter;
     SwingLeftInAnimationAdapter animationAdapter;
     private List<RowItem> rowItems;
-    public List<mp> mpsList;
+    public List<MpData> mpsList;
 
     DynamicBox box;
 
@@ -124,9 +119,9 @@ public class bottomMps  extends Fragment implements AdapterView.OnItemClickListe
 
     }
 
-    public class CustomComparator implements Comparator<mp> {
+    public class CustomComparator implements Comparator<MpData> {
         @Override
-        public int compare(mp o1, mp o2) {
+        public int compare(MpData o1, MpData o2) {
             return Integer.valueOf(o1.getScore()).compareTo(Integer.valueOf(o2.getScore()));
         }
     }
@@ -347,7 +342,7 @@ public class bottomMps  extends Fragment implements AdapterView.OnItemClickListe
                 else points = points+ " points";
 
 
-                RowItem row1 = new RowItem(mpsList.get(i).getFirst_name()+" "+mpsList.get(i).getLast_name(),constit, points, "#"+(i+1), defdrawable);
+                RowItem row1 = new RowItem(mpsList.get(i).getFirst_name()+" "+mpsList.get(i).getLast_name(),constit, points, "#"+(i+1), mpsList.get(i).getImgurl());
                 rowItems.add(row1);
 
             }

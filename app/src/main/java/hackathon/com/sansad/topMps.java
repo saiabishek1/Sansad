@@ -63,6 +63,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import hackathon.com.sansad.models.mp.MpData;
 import mehdi.sakout.dynamicbox.DynamicBox;
 
 /**
@@ -81,20 +82,18 @@ public class topMps extends Fragment implements AdapterView.OnItemClickListener 
 
 
 
-        String[] name = new String[60];
+        String[] name = new String[900];
 
         Integer[] constit = new Integer[60];
         String[] rank = new String[60];
 
         Date[] points = new Date[60];
 
-    public List<mp> mpsList;
+    public List<MpData> mpsList;
 
 
         int size;
         TextView tv;
-
-        Drawable[] profiles = new Drawable[60];
 
 
 
@@ -130,8 +129,6 @@ public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
 
         Drawable d = getActivity().getResources().getDrawable(R.drawable.profile1);
-        Arrays.fill(profiles, d);
-
 
 
     SharedPreferences appSharedPrefs = PreferenceManager
@@ -151,9 +148,9 @@ public void onCreate(Bundle savedState) {
 
 }
 
-    public class CustomComparator implements Comparator<mp> {
+    public class CustomComparator implements Comparator<MpData> {
         @Override
-        public int compare(mp o1, mp o2) {
+        public int compare(MpData o1, MpData o2) {
             return Integer.valueOf(o1.getScore()).compareTo(Integer.valueOf(o2.getScore()));
         }
     }
@@ -358,6 +355,8 @@ public void onItemClick(AdapterView<?> parent, View view, int position,
         }
 
 
+
+
 public class RetreiveItems extends AsyncTask<String, Void, List<RowItem>> {
 
 
@@ -405,7 +404,7 @@ public class RetreiveItems extends AsyncTask<String, Void, List<RowItem>> {
 
 
 
-                                RowItem row1 = new RowItem(mpsList.get(i).getFirst_name()+" "+mpsList.get(i).getLast_name(), constit, points, "#"+(i +1), defdrawable);
+                                RowItem row1 = new RowItem(mpsList.get(i).getFirst_name()+" "+mpsList.get(i).getLast_name(), constit, points, "#"+(i +1),mpsList.get(i).getImgurl());
                                 rowItems.add(row1);
 
 

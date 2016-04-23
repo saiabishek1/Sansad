@@ -15,13 +15,13 @@ public class RowItem {
     private String points;
     private String rank;
 
-    private Drawable profilePic;
+    private String profilePic;
 
 
 
 
 
-    public RowItem(String name, String constit, String points, String rank, Drawable profilePic)
+    public RowItem(String name, String constit, String points, String rank, String profilePic)
     {
         this.name = name;
         this.constit=constit;
@@ -48,7 +48,7 @@ public class RowItem {
 
 
 
-    public Drawable getProfilePic() {
+    public String getProfilePic() {
         return profilePic;
     }
 
@@ -70,7 +70,7 @@ public class RowItem {
     }
 
 
-    public void setProfilePic(Drawable profilePic) {
+    public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }
 

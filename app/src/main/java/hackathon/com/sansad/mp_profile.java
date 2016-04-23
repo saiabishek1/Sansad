@@ -32,7 +32,12 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import org.json.JSONException;
@@ -407,6 +412,7 @@ public class mp_profile extends ActionBarActivity {
             viewbio.setVisibility(View.VISIBLE);
             viewbio.setText(bio);
             YoYo.with(Techniques.FadeIn).delay(300).playOn(viewbio);
+
 
             ImageLoader.getInstance().loadImage(finalurl, new SimpleImageLoadingListener() {
                 @Override

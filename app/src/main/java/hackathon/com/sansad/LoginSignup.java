@@ -11,11 +11,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
-import com.microsoft.windowsazure.mobileservices.MobileServiceList;
-import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
-
 import java.net.MalformedURLException;
 import java.util.concurrent.ExecutionException;
 
@@ -28,12 +23,7 @@ public class LoginSignup extends Activity {
     String passwordtxt;
     EditText password;
     EditText username;
-    private MobileServiceClient mClient;
-    private MobileServiceTable<userdetails> mToDoTable;
 
-    /**
-     * Called when the activity is first created.
-     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from main.xml
@@ -42,17 +32,7 @@ public class LoginSignup extends Activity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
 
-        try {
-            mClient = new MobileServiceClient(
-                    "https://sansad.azure-mobile.net/",
-                    "tMUuarybjmudtoSINqaIwVXitErkHn53",
-                    this
 
-            );
-            mToDoTable = mClient.getTable(userdetails.class);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
         /*
         Item item = new Item();
         item.Text = "Awesome item";
@@ -97,28 +77,6 @@ public class LoginSignup extends Activity {
 
                                 boolean flag=false;
 
-                                    try {
-                                        System.out.println("Sdsd");
-                                        final MobileServiceList<userdetails> result = mToDoTable.where().execute().get();
-                                        for(userdetails u:result) {
-                                            if (u.username.equals(usernametxt)&&(u.password.equals(passwordtxt)))
-                                                flag=true;
-
-                                        }
-
-                                        System.out.println("Sdsdasdasda");
-
-
-
-
-
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-
-                                    } catch (ExecutionException e) {
-                                        e.printStackTrace();
-
-                                    }
 
                                   if(flag){
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import com.nhaarman.listviewanimations.itemmanipulation.expandablelistitem.ExpandableListItemAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
@@ -93,10 +94,8 @@ public class CustomAdapter extends BaseAdapter {
         points.setText(row_pos.getPoints());
 
         rank.setText(row_pos.getRank());
-
-
-
-        profilePic.setImageDrawable(row_pos.getProfilePic());
+        if(!row_pos.getProfilePic().isEmpty())
+        Picasso.with(context).load(row_pos.getProfilePic()).into(profilePic);
 
 
 

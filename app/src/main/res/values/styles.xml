@@ -1,5 +1,35 @@
 <resources>
 
+    <style name="FacebookLoginButton">
+        <item name="android:background">#3b5998</item>
+        <item name="android:drawableLeft">@drawable/ic_facebook</item>
+        <item name="android:drawableStart">@drawable/ic_facebook</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:text">@string/sign_in_with_facebook</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+
+    <style name="GooglePlusLoginButton">
+        <item name="android:background">#DC4E41</item>
+        <item name="android:drawableLeft">@drawable/ic_google_plus</item>
+        <item name="android:drawableStart">@drawable/ic_google_plus</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/sign_in_with_google</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+
+
     <style name="Theme.Transparent" parent="android:Theme">
 
 
@@ -34,11 +64,11 @@
 
 
         <!-- Set AppCompat’s color theming attrs -->
-        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimary">@color/primary</item>
 
-        <item name="colorPrimaryDark">@color/darkpurple</item>
+        <item name="colorPrimaryDark">@color/primary</item>
         <item name="actionBarTabStyle">@style/MyActionBarTabs</item>
-        <item name="colorAccent">@color/purple</item>
+        <item name="colorAccent">@color/secondary</item>
         <item name="android:windowActionBar">true</item>
 
         <item name="android:windowContentOverlay">@null</item>
@@ -50,11 +80,11 @@
     </style>
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
-        <item name="color">@android:color/white</item>
+        <item name="color">@color/secondary</item>
     </style>
 
     <style name="Theme.MyApp.ActionBar" parent="style/Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimary">@color/primary</item>
         <item name="elevation">0dp</item>
     </style>
 
@@ -78,17 +108,22 @@
 
     <style name="menu_labels_style">
         <item name="android:background">@drawable/fab_label_background</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/secondary</item>
     </style>
 
     <style name="DialogAnimation" parent="@android:style/Theme.Panel">
         <item name="android:windowAnimationStyle">@style/MyAnimations</item>
     </style>
 
+
+
     <style name="MyAnimations" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/anim_out</item>
         <item name="android:windowExitAnimation">@anim/anim_out</item>
     </style>
+
+
+
 
 
 

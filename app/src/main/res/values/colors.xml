@@ -68,4 +68,10 @@
     <color name="asbestos">#7f8c8d</color>
 
 
+    <color name="primary">#1c1819</color>
+
+    <color name="secondary">#d91320</color>
+    <color name="back">#e6e6e6</color>
+
+
 </resources>

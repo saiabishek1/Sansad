@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1c1819"
+    app:bbn_badgeColor="#FFFF0000"
+    app:bbn_rippleColor="#565656"
+    app:bbn_itemColorActive="@color/secondary"
+    app:bbn_itemColorInactive="@color/timestamp">
+
+    <item
+        android:id="@+id/bbn_item1"
+        android:icon="@drawable/up"
+        android:title="Top MPs" />
+    <item
+        android:id="@+id/bbn_item2"
+        android:icon="@drawable/news"
+        android:title="News" />
+    <item
+        android:id="@+id/bbn_item3"
+        android:icon="@drawable/down"
+        android:title="Bottom MPs" />
+
+
+</menu>

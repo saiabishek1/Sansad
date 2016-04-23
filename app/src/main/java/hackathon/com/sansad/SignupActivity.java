@@ -17,10 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
-import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
-import com.microsoft.windowsazure.mobileservices.table.TableOperationCallback;
-
 import java.net.MalformedURLException;
 
 /**
@@ -28,19 +24,11 @@ import java.net.MalformedURLException;
  */
 
 public class SignupActivity extends ActionBarActivity {
-    private MobileServiceClient mClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            mClient = new MobileServiceClient(
-                    "https://sansad.azure-mobile.net/",
-                    "tMUuarybjmudtoSINqaIwVXitErkHn53",
-                    this
-            );
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
         final userdetails ud= new userdetails();
         setContentView(R.layout.activity_signup);
         final TextView username = (TextView) findViewById(R.id.username1);
@@ -132,33 +120,6 @@ public class SignupActivity extends ActionBarActivity {
                                 ud.username=username.getText().toString();
                                 ud.email=email.getText().toString();
                                 ud.password=password.getText().toString();
-                                mClient.getTable(userdetails.class).insert(ud, new TableOperationCallback<userdetails>() {
-
-                                    @Override
-                                    public void onCompleted(userdetails entity, Exception exception, ServiceFilterResponse response) {
-                                        if (exception == null) {
-                                            // Insert succeeded
-
-                                            progressDialog1.dismiss();
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Successfully Signed up, please log in.",
-                                                    Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(
-                                                    SignupActivity.this,
-                                                    LoginSignup.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(intent);
-                                        } else {
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Sign up Error", Toast.LENGTH_SHORT)
-                                                    .show();
-                                            progressDialog1.dismiss();
-                                            // Insert failed
-                                        }
-                                    }
-                                });
-
-
 
 
 

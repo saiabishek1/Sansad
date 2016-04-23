@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="BottomNavigation">
+        <attr name="bbn_entries" format="reference" />
+        <attr name="bbn_badgeProvider" format="string" />
+    </declare-styleable>
+
+    <!-- styles for the menu resource -->
+    <declare-styleable name="BottomNavigationMenu">
+        <!-- menu default background color -->
+        <attr name="android:background" />
+
+        <!-- default badge color -->
+        <attr name="bbn_badgeColor" format="color" />
+
+        <!-- animation duration for the menu items -->
+        <attr name="bbn_itemAnimationDuration" format="integer" />
+
+        <!-- ripple selector color -->
+        <attr name="bbn_rippleColor" format="color" />
+
+        <attr name="bbn_itemColorActive" format="color" />
+
+        <attr name="bbn_itemColorInactive" format="color" />
+    </declare-styleable>
+
+</resources>
