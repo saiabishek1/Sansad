@@ -13,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -49,7 +50,7 @@ import java.util.List;
 import mehdi.sakout.dynamicbox.DynamicBox;
 
 
-public class central extends ActionBarActivity {
+public class central extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -143,7 +144,7 @@ public class central extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         Bundle bundle= getIntent().getExtras();
-        String nam= bundle.getString("uname");
+        String nam= "My Name";
         NAME=nam;
         super.onCreate(savedInstanceState);
         Drawable d = this.getResources().getDrawable(R.drawable.profile1);
