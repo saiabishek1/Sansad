@@ -66,5 +66,5 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'com.quinny898.library.persistentsearch:library:1.1.0-SNAPSHOT'
     compile 'com.github.clans:fab:1.6.3'
-    
+
 }

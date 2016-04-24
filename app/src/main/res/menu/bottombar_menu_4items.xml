@@ -9,16 +9,19 @@
 
     <item
         android:id="@+id/bbn_item1"
-        android:icon="@drawable/up"
-        android:title="Top MPs" />
+        android:icon="@drawable/man"
+        android:title="MPs" />
     <item
         android:id="@+id/bbn_item2"
-        android:icon="@drawable/news"
-        android:title="News" />
+        android:icon="@drawable/tags"
+        android:title="Tags" />
+
+
     <item
-        android:id="@+id/bbn_item3"
-        android:icon="@drawable/down"
-        android:title="Bottom MPs" />
+    android:id="@+id/bbn_item3"
+    android:icon="@drawable/news"
+    android:title="News" />
+
 
 
 </menu>

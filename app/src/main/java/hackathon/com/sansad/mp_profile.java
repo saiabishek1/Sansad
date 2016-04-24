@@ -53,6 +53,7 @@ import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,8 +65,6 @@ import java.util.ArrayList;
 import hackathon.com.sansad.models.api.getReviews.GetReviewsModel;
 import hackathon.com.sansad.models.api.getReviews.Review;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -109,8 +108,6 @@ public class mp_profile extends ActionBarActivity {
         viewbio.setVisibility(View.INVISIBLE);
 
 
-
-
         reviews = (RelativeLayout) findViewById(R.id.reviews_rl);
         profile = (RelativeLayout) findViewById(R.id.profile_rl);
         news = (RelativeLayout) findViewById(R.id.news_rl);
@@ -133,7 +130,6 @@ public class mp_profile extends ActionBarActivity {
         name = intent.getStringExtra("name");
 
 
-
         debat = intent.getStringExtra("debate"); //Optional parameters
         bill = intent.getStringExtra("bills"); //Optional parameters
         question = intent.getStringExtra("questions"); //Optional parameters
@@ -150,6 +146,9 @@ public class mp_profile extends ActionBarActivity {
 
 
         new GetContacts().execute(name);
+
+
+        new getNews().execute(name);
 
 
         profile.setVisibility(View.VISIBLE);
@@ -219,8 +218,6 @@ public class mp_profile extends ActionBarActivity {
         l.setYEntrySpace(5f);
 
 
-
-
         bottomNavigation = (BottomNavigation) findViewById(R.id.BottomNavigation2);
         bottomNavigation.setDefaultSelectedIndex(1);
         bottomNavigation.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
@@ -232,8 +229,6 @@ public class mp_profile extends ActionBarActivity {
                     reviews.setVisibility(View.VISIBLE);
                     profile.setVisibility(View.GONE);
                     final ListView listView = (ListView) findViewById(R.id.reviews);
-
-
 
 
                     SQLiteDBHelper helper = new SQLiteDBHelper(mp_profile.this);
@@ -614,6 +609,80 @@ public class mp_profile extends ActionBarActivity {
             super.onPostExecute(result);
             viewbio.setVisibility(View.VISIBLE);
             viewbio.setText(bio);
+
+
+            //  if (drawable == null)
+
+
+        }
+    }
+
+
+    private class getNews extends AsyncTask<String, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(String... arg0) {
+            // Creating service handler class instance
+
+            ServiceHandler sh = new ServiceHandler();
+            String name = arg0[0];
+            name = name.replaceAll(" ", "%20");
+            name = name.replaceAll(".", "");
+
+            String url = "https://webhose.io/search?token=af1169d5-0e7f-4a73-ab79-fbd52ca001e2&format=json&q=%22" + name + "%22%20language%3A(english)%20thread.country%3AIN&size=10";
+            Log.d("Naaaaaa",name);
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+
+
+            // Making a request to url and getting
+            Log.d("Response: ", "> " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObject2 = new JSONObject(jsonStr);
+                    JSONArray parse = jsonObject2.getJSONArray("posts");
+                    int i = 0;
+                    for(i=0;i < 10;i++) {
+
+
+
+                            JSONObject thread = parse.getJSONObject(i);
+                            String url2 = thread.getString("url");
+                            String title = thread.getString("title");
+
+
+                                Log.d("JSON DATA", url2 + " " + title + " ");
+
+
+
+
+
+
+
+                    }
+
+
+                    // Getting JSON Array node
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+            }
+
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+
+            super.onPostExecute(result);
 
 
             //  if (drawable == null)
