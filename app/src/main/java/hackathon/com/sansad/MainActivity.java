@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import hackathon.com.sansad.models.signIn;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -26,12 +28,12 @@ public class MainActivity extends Activity {
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                Intent intent = new Intent(MainActivity.this, LoginSignup.class);
+                Intent intent = new Intent(MainActivity.this, signIn.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 MainActivity.this.finish();
             }
-        }, 500);
+        }, 200);
     }
 
 

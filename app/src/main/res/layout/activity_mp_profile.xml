@@ -1,11 +1,16 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/profile_rl"
+    android:visibility="visible"
+    >
     <LinearLayout
         android:id="@+id/lin3"
         android:layout_width="match_parent"
@@ -28,8 +33,8 @@
                 android:layout_height="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="55dp"
-                android:background="@color/darkpurple" />
+                android:layout_marginTop="50dp"
+                android:background="@color/secondary" />
 
 
             <ImageView
@@ -40,11 +45,11 @@
                 android:layout_alignParentStart="false"
                 android:layout_below="@+id/imageView3"
                 android:layout_marginTop="5dp"
-                android:background="@color/darkpurple" />
+                android:background="@color/secondary" />
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="106dp"
-                android:layout_height="106dp"
+                android:layout_width="92dp"
+                android:layout_height="92dp"
                 android:id="@+id/filler"
                 android:layout_gravity="center"
                 android:src="@color/transparent"
@@ -57,14 +62,14 @@
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/viewpropic"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:src="@color/transparent"
-                android:layout_height="100dp"
+                android:layout_height="85dp"
 
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                app:border_color="@color/darkpurple"
+                app:border_color="@color/secondary"
                 app:border_width="5dp" />
 
 
@@ -78,7 +83,7 @@
             android:layout_marginTop="10dp"
             android:text="utk994"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/viewuserbio"
@@ -87,7 +92,7 @@
             android:layout_marginTop="6dp"
 
 
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:paddingLeft="15dp"
             android:paddingRight="15dp" />
@@ -105,4 +110,55 @@
 
     </LinearLayout>
 </RelativeLayout>
-</ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/news_rl"
+        android:visibility="gone"
+        >
+        <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+            android:layout_width="match_parent"
+            android:id="@+id/news"
+            android:visibility="gone"
+            android:layout_height="match_parent"></com.nhaarman.listviewanimations.itemmanipulation.DynamicListView>
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/reviews_rl"
+        android:visibility="gone"
+        >
+        <ListView
+            android:layout_width="match_parent"
+
+            android:id="@+id/reviews"
+            android:layout_height="match_parent"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/review_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="68dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/plus"
+            fab:fab_colorNormal="@color/secondary"
+            fab:fab_colorPressed="#b71c1c"
+            fab:fab_colorRipple="#99FFFFFF"/>
+
+    </RelativeLayout>
+
+    <it.sephiroth.android.library.bottomnavigation.BottomNavigation
+        android:id="@+id/BottomNavigation2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        app:bbn_entries="@menu/bottombar_menu_3items"
+        app:bbn_scrollEnabled="false"
+        app:bbn_badgeProvider="@string/bbn_badgeProvider"
+        app:layout_behavior="@string/bbn_phone_view_behavior" />
+</android.support.design.widget.CoordinatorLayout>

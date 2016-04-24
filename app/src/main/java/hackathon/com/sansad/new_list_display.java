@@ -66,6 +66,7 @@ public class new_list_display extends Activity  {
     FloatingActionButton a2z;
     FloatingActionButton bottom;
     FloatingActionButton top;
+    FloatingActionButton attend;
 
     ArrayList<MpData> mpsList;
     ImageLoader imageLoader;
@@ -87,6 +88,7 @@ public class new_list_display extends Activity  {
 
         names = (Button) findViewById(R.id.name_butt);
         pin = (Button) findViewById(R.id.pincode);
+        attend = (FloatingActionButton) findViewById(R.id.menu_item8);
         debates = (FloatingActionButton) findViewById(R.id.menu_item7);
         bills = (FloatingActionButton) findViewById(R.id.menu_item6);
         question = (FloatingActionButton) findViewById(R.id.menu_item5);
@@ -94,6 +96,9 @@ public class new_list_display extends Activity  {
         a2z = (FloatingActionButton) findViewById(R.id.menu_item3);
         bottom = (FloatingActionButton) findViewById(R.id.menu_item2);
         top = (FloatingActionButton) findViewById(R.id.menu_item);
+
+
+
 
 
         search = (EditText) findViewById(R.id.search_toolbar);
@@ -209,6 +214,31 @@ public class new_list_display extends Activity  {
 
                 Collections.sort(mpsList, new CustomComparator());
                 Collections.reverse(mpsList);
+
+                attend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Collections.sort(mpsList, new Comparator<MpData>() {
+                            @Override
+                            public int compare(MpData lhs, MpData rhs) {
+                                return Integer.parseInt(lhs.getAttendance_percentage()) - Integer.parseInt(rhs.getAttendance_percentage());
+                            }
+                        });
+                        Collections.reverse(mpsList);
+                        adapter = new CustomAdapter(new_list_display.this, mpsList);
+
+                        adapter.notifyDataSetChanged();
+
+
+                        animationAdapter = new SwingLeftInAnimationAdapter(adapter);
+                        animationAdapter.notifyDataSetChanged();
+
+
+                        animationAdapter.setAbsListView(list);
+
+                        list.setAdapter(animationAdapter);
+                    }
+                });
 
 
                 debates.setOnClickListener(new View.OnClickListener() {
@@ -430,6 +460,8 @@ public class new_list_display extends Activity  {
                         myIntent.putExtra("constit", mpsList.get(position).getConstituency()); //Optional parameters
                         myIntent.putExtra("state",  mpsList.get(position).getState()); //Optional parameters
                         myIntent.putExtra("house", mpsList.get(position).getHouse()); //Optional parameters
+                        myIntent.putExtra("img", mpsList.get(position).getImgurl()); //Optional parameters
+                        myIntent.putExtra("id", mpsList.get(position).getId()); //Optional parameters
 
 
 

@@ -208,6 +208,15 @@
             fab:fab_size="mini"
             fab:fab_label="Debates" />
 
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/attend"
+            fab:fab_size="mini"
+            fab:fab_label="Attendance" />
+
     </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>

@@ -7,6 +7,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.IdRes;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -14,13 +17,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.daimajia.androidanimations.library.sliders.SlideInLeftAnimator;
+import com.github.clans.fab.FloatingActionButton;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -32,6 +41,9 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.nhaarman.listviewanimations.appearance.AnimationAdapter;
+import com.nhaarman.listviewanimations.appearance.simple.SwingLeftInAnimationAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -39,13 +51,24 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+
+import hackathon.com.sansad.models.api.getReviews.GetReviewsModel;
+import hackathon.com.sansad.models.api.getReviews.Review;
+import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by utk994 on 31-Oct-15.
@@ -64,10 +87,16 @@ public class mp_profile extends ActionBarActivity {
 
     ImageView profilePic;
 
-   Drawable defdrawable;
 
     String pageid;
     int attendancce;
+
+    String id;
+    String img;
+
+    RelativeLayout reviews, profile, news;
+
+    BottomNavigation bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +104,18 @@ public class mp_profile extends ActionBarActivity {
         setContentView(R.layout.activity_mp_profile);
 
 
-        attendancce=(int)Math.random()*100;
+        viewbio = (TextView) findViewById(R.id.viewuserbio);
 
-          defdrawable = getResources().getDrawable(R.drawable.profile);
+        viewbio.setVisibility(View.INVISIBLE);
 
 
+
+
+        reviews = (RelativeLayout) findViewById(R.id.reviews_rl);
+        profile = (RelativeLayout) findViewById(R.id.profile_rl);
+        news = (RelativeLayout) findViewById(R.id.news_rl);
+
+        profile.setVisibility(View.VISIBLE);
 
 
         if (getSupportActionBar() != null)
@@ -88,7 +124,7 @@ public class mp_profile extends ActionBarActivity {
 
         LinearLayout lay = (LinearLayout) findViewById(R.id.lin3);
 
-        YoYo.with(Techniques.FadeIn).duration(1000).playOn(lay);
+        YoYo.with(Techniques.FadeIn).duration(500).playOn(lay);
 
 
         final Intent intent = getIntent();
@@ -96,7 +132,7 @@ public class mp_profile extends ActionBarActivity {
 
         name = intent.getStringExtra("name");
 
-        new GetContacts().execute(name);
+
 
         debat = intent.getStringExtra("debate"); //Optional parameters
         bill = intent.getStringExtra("bills"); //Optional parameters
@@ -107,10 +143,24 @@ public class mp_profile extends ActionBarActivity {
         final String state = intent.getStringExtra("state"); //Optional parameters
         final String house = intent.getStringExtra("house");//Optional parameters
 
+        final String pic = intent.getStringExtra("img");
+        id = intent.getStringExtra("id");
+
         this.setTitle(name);
+
+
+        new GetContacts().execute(name);
+
+
+        profile.setVisibility(View.VISIBLE);
+        reviews.setVisibility(View.GONE);
+        news.setVisibility(View.GONE);
+
+        attendancce = (int) Math.random() * 100;
+
         profilePic = (ImageView) findViewById(R.id.viewpropic);
-        Drawable d = getResources().getDrawable(R.drawable.profile);
-        profilePic.setImageDrawable(d);
+
+        Picasso.with(mp_profile.this).load(pic).into(profilePic);
 
 
         profilePic.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +217,184 @@ public class mp_profile extends ActionBarActivity {
 
         l.setXEntrySpace(7f);
         l.setYEntrySpace(5f);
+
+
+
+
+        bottomNavigation = (BottomNavigation) findViewById(R.id.BottomNavigation2);
+        bottomNavigation.setDefaultSelectedIndex(1);
+        bottomNavigation.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
+            @Override
+            public void onMenuItemSelect(@IdRes int i, int i1) {
+
+                if (i == R.id.bbn_item5) {
+                    news.setVisibility(View.GONE);
+                    reviews.setVisibility(View.VISIBLE);
+                    profile.setVisibility(View.GONE);
+                    final ListView listView = (ListView) findViewById(R.id.reviews);
+
+
+
+
+                    SQLiteDBHelper helper = new SQLiteDBHelper(mp_profile.this);
+                    String session = helper.getUserDetails().getSession().getSessionid();
+                    String token = helper.getUserDetails().getSession().getToken();
+
+                    apiClient.getAPI().getReviews(session, token, id, new Callback<GetReviewsModel>() {
+                        @Override
+                        public void success(GetReviewsModel getReviewsModel, Response response) {
+
+                            ArrayList<Review> reviews = new ArrayList<Review>();
+                            reviews.addAll(getReviewsModel.getResponse().getData());
+                            reviewsAdapter adapter = new reviewsAdapter(mp_profile.this, reviews);
+
+                            listView.setAdapter(adapter);
+
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+
+                        }
+                    });
+
+                    final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.review_fab);
+
+
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            fab.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ReviewDialog.id = id;
+                                    startActivity(new Intent(mp_profile.this, ReviewDialog.class));
+                                }
+                            });
+                            final Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    fab.setVisibility(View.GONE);
+                                }
+                            };
+                            final Handler handler = new Handler(new Handler.Callback() {
+                                @Override
+                                public boolean handleMessage(Message msg) {
+                                    return true;
+                                }
+                            });
+                            listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                                @Override
+                                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                                    if (scrollState == 1)
+                                        fab.setVisibility(View.VISIBLE);
+                                    else {
+                                        handler.removeCallbacks(runnable);
+                                        handler.postDelayed(runnable, 1500);
+                                    }
+                                }
+
+                                @Override
+                                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                                }
+                            });
+
+
+                        }
+                    });
+                }
+
+                if (i == R.id.bbn_item4) {
+
+
+                    new GetContacts().execute(name);
+
+                    profile.setVisibility(View.VISIBLE);
+                    reviews.setVisibility(View.GONE);
+                    news.setVisibility(View.GONE);
+
+                    attendancce = (int) Math.random() * 100;
+
+                    profilePic = (ImageView) findViewById(R.id.viewpropic);
+
+                    Picasso.with(mp_profile.this).load(pic).into(profilePic);
+
+
+                    profilePic.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent myIntent = new Intent(mp_profile.this, mp_details.class);
+                            myIntent.putExtra("name", name); //Optional parameters
+                            myIntent.putExtra("debate", debat); //Optional parameters
+                            myIntent.putExtra("bills", bill); //Optional parameters
+                            myIntent.putExtra("questions", question); //Optional parameters
+                            myIntent.putExtra("age", age); //Optional parameters
+                            myIntent.putExtra("education", education); //Optional parameters
+                            myIntent.putExtra("constit", constit); //Optional parameters
+                            myIntent.putExtra("state", state); //Optional parameters
+                            myIntent.putExtra("house", house);//Optional parameters
+
+                            mp_profile.this.startActivity(intent);
+                        }
+                    });
+
+
+                    TextView viewuser = (TextView) findViewById(R.id.viewuname);
+                    viewbio = (TextView) findViewById(R.id.viewuserbio);
+
+                    viewbio.setVisibility(View.INVISIBLE);
+
+
+                    viewuser.setText(name);
+
+
+                    mChart = (RadarChart) findViewById(R.id.chart);
+
+
+                    mChart.setDescription("");
+
+                    mChart.setWebLineWidth(1.5f);
+                    mChart.setWebLineWidthInner(0.75f);
+                    mChart.setWebAlpha(100);
+
+
+                    setData();
+
+                    XAxis xAxis = mChart.getXAxis();
+
+
+                    YAxis yAxis = mChart.getYAxis();
+
+                    yAxis.setLabelCount(5, false);
+                    yAxis.setTextSize(9f);
+                    yAxis.setStartAtZero(true);
+
+                    Legend l = mChart.getLegend();
+                    l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+
+                    l.setXEntrySpace(7f);
+                    l.setYEntrySpace(5f);
+
+
+                }
+
+                if (i == R.id.bbn_item3) {
+
+                    profile.setVisibility(View.VISIBLE);
+                    reviews.setVisibility(View.GONE);
+                    news.setVisibility(View.GONE);
+
+
+                }
+            }
+
+
+            @Override
+            public void onMenuItemReselect(@IdRes int i, int i1) {
+
+            }
+        });
 
 
     }
@@ -272,16 +500,16 @@ public class mp_profile extends ActionBarActivity {
                 // custom dialog
                 final Dialog dialog = new Dialog(mp_profile.this);
                 dialog.setContentView(R.layout.dialog_box);
-                dialog.setTitle("Statistic for "+name);
+                dialog.setTitle("Statistic for " + name);
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
                 TextView text1 = (TextView) dialog.findViewById(R.id.textView2);
                 TextView text2 = (TextView) dialog.findViewById(R.id.textView3);
                 TextView text3 = (TextView) dialog.findViewById(R.id.textView4);
-                text.setText("Attendance = "+(String.valueOf((attendancce))));
-                text1.setText("Debates = "+(String.valueOf((debat))));
-                text1.setText("Questions = "+(String.valueOf((question))));
+                text.setText("Attendance = " + (String.valueOf((attendancce))));
+                text1.setText("Debates = " + (String.valueOf((debat))));
+                text1.setText("Questions = " + (String.valueOf((question))));
                 text1.setText("Questions = " + (String.valueOf((bill))));
 
 
@@ -348,7 +576,7 @@ public class mp_profile extends ActionBarActivity {
                 try {
                     JSONObject jsonObject2 = new JSONObject(jsonStr1);
                     JSONObject parse = jsonObject2.getJSONObject("parse");
-                     pageid = parse.getString("pageid");
+                    pageid = parse.getString("pageid");
 
 
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -375,31 +603,6 @@ public class mp_profile extends ActionBarActivity {
             }
 
 
-            String url2 = "https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=150&titles=" + query;
-
-            // Making a request to url and getting response
-            String jsonStr2 = sh.makeServiceCall(url2, ServiceHandler.GET);
-
-
-            Log.d("Response: ", "> " + jsonStr2);
-
-            if (jsonStr != null) {
-                try {
-
-
-                    JSONObject jsonObj = new JSONObject(jsonStr2);
-                    JSONObject abs = jsonObj.getJSONObject("query");
-                    JSONObject pages = abs.getJSONObject("pages");
-                    JSONObject thumbnail = pages.getJSONObject(pageid);
-                    JSONObject thumb = thumbnail.getJSONObject("thumbnail");
-                    finalurl = thumb.getString("source");
-
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-
-
-            }
             return null;
         }
 
@@ -411,24 +614,10 @@ public class mp_profile extends ActionBarActivity {
             super.onPostExecute(result);
             viewbio.setVisibility(View.VISIBLE);
             viewbio.setText(bio);
-            YoYo.with(Techniques.FadeIn).delay(300).playOn(viewbio);
 
 
-            ImageLoader.getInstance().loadImage(finalurl, new SimpleImageLoadingListener() {
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    Drawable drawable = new BitmapDrawable(getResources(), loadedImage);
+            //  if (drawable == null)
 
-
-                 //  if (drawable == null)
-                    //    drawable = defdrawable;
-
-                    profilePic.setImageDrawable(drawable);
-
-
-                }
-
-            });
 
         }
     }

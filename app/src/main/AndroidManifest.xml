@@ -10,23 +10,30 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
+        android:name=".init"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon1"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".init"
         android:theme="@style/AppTheme">
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".LoginSignup"
-            android:label="@string/title_activity_login_signup"/>
+            android:label="@string/title_activity_login_signup" />
         <activity
             android:name=".central"
             android:label="Central">
@@ -34,46 +41,45 @@
         </activity>
         <activity
             android:name=".NameSearch"
-            android:label="Name Search"/>
+            android:label="Name Search" />
         <activity
             android:name=".mp_profile"
-            android:label="MP Profile"/>
+            android:label="MP Profile" />
         <activity
             android:name=".SignupActivity"
-            android:label="SignUp"/>
+            android:label="SignUp" />
         <activity
             android:name=".forgotPass"
-            android:label="Forgot Password"/>
+            android:label="Forgot Password" />
         <activity
             android:name=".blank"
-            android:label="@string/title_activity_blank"/>
+            android:label="@string/title_activity_blank" />
 
         <activity android:name=".models.signIn">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".SignInWithFBActivity"></activity>
         <activity android:name=".SignInwithGplus"></activity>
         <activity android:name=".UpdateDetailsActivity"></activity>
         <activity
             android:name=".mp_details"
-            android:label="@string/title_activity_mp_details"/>
+            android:label="@string/title_activity_mp_details" />
         <activity android:name=".new_list_display">
 
         </activity>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity android:name=".searchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ReviewDialog" />
     </application>
 
 </manifest>
