@@ -123,9 +123,6 @@ public class topMps extends Fragment implements AdapterView.OnItemClickListener 
 
         super.onCreate(savedState);
 
-        Drawable d = getActivity().getResources().getDrawable(R.drawable.profile1);
-
-
         SharedPreferences appSharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this.getActivity().getApplicationContext());
         SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();

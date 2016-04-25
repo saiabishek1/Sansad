@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto">
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_rl">
 <android.support.design.widget.CoordinatorLayout
     android:id="@+id/CoordinatorLayout01"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,7 +41,19 @@
         android:layout_below="@+id/toolbar12"
         android:background="#e6e6e6"
         android:layout_above="@+id/CoordinatorLayout01"
-        android:showDividers="none" />
+        android:showDividers="none"
+        />
+
+        <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+            android:id="@+id/list2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:smoothScrollbar="true"
+            android:layout_below="@+id/toolbar12"
+            android:background="#e6e6e6"
+            android:visibility="gone"
+            android:layout_above="@+id/CoordinatorLayout01"
+            android:showDividers="none" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar12"
@@ -218,5 +235,7 @@
             fab:fab_label="Attendance" />
 
     </com.github.clans.fab.FloatingActionMenu>
+
+</RelativeLayout>
 
 </RelativeLayout>

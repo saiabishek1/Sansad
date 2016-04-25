@@ -12,6 +12,7 @@ import hackathon.com.sansad.models.images.ImageDownloadCallback;
 import hackathon.com.sansad.models.images.ImageUploadCallback;
 import hackathon.com.sansad.models.mp.MpResponse;
 import hackathon.com.sansad.models.places.PlacesModel;
+import hackathon.com.sansad.models.tags.TagsModel;
 import hackathon.com.sansad.models.user.ChangePasswordModel;
 import hackathon.com.sansad.models.user.ResetPasswordModel;
 import hackathon.com.sansad.models.userids.UserIdsModel;
@@ -141,6 +142,10 @@ public class apiClient {
         @POST("/?method=getMp&key=leuk12&secret=gammayz")
         void getMp(@Query("sessionid") String sessionid, @Query("token") String token
                 , Callback<MpResponse> callback);
+
+        @POST("/?method=getTags&key=leuk12&secret=gammayz")
+        void getTags(@Query("sessionid") String sessionid, @Query("token") String token
+                , Callback<TagsModel> callback);
 
     }
 }
